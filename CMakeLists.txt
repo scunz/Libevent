@@ -1074,7 +1074,7 @@ set(EVENT_INSTALL_INCLUDE_DIR   include CACHE PATH "Installation directory for h
 if(WIN32 AND NOT CYGWIN)
   set(DEF_INSTALL_CMAKE_DIR cmake)
 else()
-  set(DEF_INSTALL_CMAKE_DIR lib/cmake/libevent)
+  set(DEF_INSTALL_CMAKE_DIR lib/cmake/libEvent)
 endif()
 
 set(EVENT_INSTALL_CMAKE_DIR ${DEF_INSTALL_CMAKE_DIR} CACHE PATH "Installation directory for CMake files")
@@ -1089,16 +1089,16 @@ endforeach()
 
 # Export targets (This is used for other CMake projects to easily find the libraries and include files).
 export(TARGETS event event_extra event_core
-        FILE "${PROJECT_BINARY_DIR}/LibeventTargets.cmake")
-export(PACKAGE libevent)
+        FILE "${PROJECT_BINARY_DIR}/libEventTargets.cmake")
+export(PACKAGE libEvent)
 
 # Generate the config file for the build-tree.
 set(EVENT__INCLUDE_DIRS
     "${PROJECT_SOURCE_DIR}/include"
     "${PROJECT_BINARY_DIR}/include")
 set(LIBEVENT_INCLUDE_DIRS ${EVENT__INCLUDE_DIRS} CACHE PATH "Libevent include directories")
-configure_file(${PROJECT_SOURCE_DIR}/cmake/LibeventConfig.cmake.in
-                ${PROJECT_BINARY_DIR}/LibeventConfig.cmake
+configure_file(${PROJECT_SOURCE_DIR}/cmake/libEventConfig.cmake.in
+                ${PROJECT_BINARY_DIR}/libEventConfig.cmake
                 @ONLY)
 
 # Generate the config file for the installation tree.
@@ -1111,15 +1111,15 @@ file(RELATIVE_PATH
 # we escape it here so it's evaluated when it is included instead
 # so that the include dirs are givenrelative to where the
 # config file is located.
-set(EVENT__INCLUDE_DIRS 
+set(EVENT__INCLUDE_DIRS
     "\${LIBEVENT_CMAKE_DIR}/${REL_INCLUDE_DIR}")
-configure_file(${PROJECT_SOURCE_DIR}/cmake/LibeventConfig.cmake.in
-                ${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/LibeventConfig.cmake
+configure_file(${PROJECT_SOURCE_DIR}/cmake/libEventConfig.cmake.in
+                ${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/libEventConfig.cmake
                 @ONLY)
 
 # Generate version info for both build-tree and install-tree.
-configure_file(${PROJECT_SOURCE_DIR}/cmake/LibeventConfigVersion.cmake.in
-                ${PROJECT_BINARY_DIR}/LibeventConfigVersion.cmake
+configure_file(${PROJECT_SOURCE_DIR}/cmake/libEventConfigVersion.cmake.in
+                ${PROJECT_BINARY_DIR}/libEventConfigVersion.cmake
                 @ONLY)
 
 # Define the public headers.
@@ -1130,7 +1130,7 @@ set_target_properties(event event_core event_extra
 # Install targets.
 #
 install(TARGETS event event_core event_extra
-        EXPORT LibeventTargets
+        EXPORT libEventTargets
         RUNTIME DESTINATION "${EVENT_INSTALL_BIN_DIR}" COMPONENT bin
         LIBRARY DESTINATION "${EVENT_INSTALL_LIB_DIR}" COMPONENT lib
         ARCHIVE DESTINATION "${EVENT_INSTALL_LIB_DIR}" COMPONENT lib
@@ -1142,13 +1142,13 @@ install(FILES ${HDR_COMPAT}
 
 # Install the configs.
 install(FILES
-    ${PROJECT_BINARY_DIR}/${CMAKE_FILES_DIRECTORY}/LibeventConfig.cmake
-    ${PROJECT_BINARY_DIR}/LibeventConfigVersion.cmake
+    ${PROJECT_BINARY_DIR}/${CMAKE_FILES_DIRECTORY}/libEventConfig.cmake
+    ${PROJECT_BINARY_DIR}/libEventConfigVersion.cmake
     DESTINATION "${EVENT_INSTALL_CMAKE_DIR}" COMPONENT dev)
 
 
 # Install exports for the install-tree.
-install(EXPORT LibeventTargets
+install(EXPORT libEventTargets
         DESTINATION "${EVENT_INSTALL_CMAKE_DIR}" COMPONENT dev)
 
 set(LIBEVENT_LIBRARIES event event_core event_extra CACHE STRING "Libevent libraries")
