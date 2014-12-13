@@ -18,7 +18,7 @@
 #       cmake -G "Visual Studio 10" ..
 #       start libevent.sln
 #
-cmake_minimum_required(VERSION 2.8.0 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.0.0 FATAL_ERROR)
 
 # get rid of the extra default configurations
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "Limited configurations" FORCE)
