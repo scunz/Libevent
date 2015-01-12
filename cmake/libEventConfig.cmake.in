@@ -7,7 +7,7 @@
 get_filename_component(LIBEVENT_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 
 # Set the include directories.
-set(LIBEVENT_INCLUDE_DIRS "@EVENT_INSTALL_INCLUDE_DIR@")
+set(LIBEVENT_INCLUDE_DIRS "@LIBEVENT_INCLUDE_DIRS@")
 
 # Include the project Targets file, this contains definitions for IMPORTED targets.
 if(NOT TARGET event_core)
